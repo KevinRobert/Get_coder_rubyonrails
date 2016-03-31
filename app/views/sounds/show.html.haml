@@ -1,0 +1,33 @@
+%main.container
+  #banner-show
+  .col-md-10.col-md-offset-2.sound-show-partial
+    = render @sound
+
+%section.container
+  - if @comments
+    #comments
+      - @comments.each do |comment|
+        = render comment
+
+  - if current_producer
+
+    .col-md-12
+      .col-md-2.col-md-offset-5
+        %span.btn.btn-success#new-comment-button
+          %span.glyphicon.glyphicon-plus
+          New comment
+
+      #new-comment-form.col-md-6.col-md-offset-3
+        %h2 Enter a comment
+
+        = form_for @comment, remote: true do |f|
+
+          = f.hidden_field :producer_id, value: current_producer.id
+          = f.hidden_field :sound_id, value: params[:id]
+
+          %fieldset.form-group
+            = f.label :body
+            = f.text_area :body, class: "form-control", id: "new-comment-body"
+
+          %fieldset.form-group
+            = f.submit "Submit", class: "btn btn-primary"

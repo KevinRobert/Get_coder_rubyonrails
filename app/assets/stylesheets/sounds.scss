@@ -1,0 +1,142 @@
+// Place all the styles related to the sounds controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.sound-partial {
+  h2 {
+    font-size: 1.5em;
+  }
+}
+
+.sound-admin-links {
+  margin-top: 80px;
+  text-align: right;
+}
+
+.tags {
+  margin: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.tag {
+  //background: linear-gradient(transparent, #0B610B), #00FF00;
+  background: $secondary-color;
+  font-size: 0.75em;
+  color: white;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 10px;
+  border: none;
+  margin: 0 3px;
+  &:hover {
+    text-decoration: none;
+    color: white;
+    box-shadow: $main-color 0 0 10px;
+  }
+}
+
+.playbutton {
+  cursor: pointer;
+  display: inline-block;
+  background-image: image-url('play.svg');
+  height: 50px;
+  width: 50px;
+  background-size: 100px 50px;
+  background-position: 0 0;
+  float: left;
+  margin: 10px 10px;
+}
+
+#banner {
+  background-image: linear-gradient(transparent 50%, $bg-color), linear-gradient(to left, $bg-color, transparent, $bg-color), image-url('banner1.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  height: 230px;
+}
+
+#banner-mysounds {
+  background-image: linear-gradient(transparent 50%, $bg-color),
+                    linear-gradient(to left, $bg-color, transparent 20%),
+                    linear-gradient(to right, $bg-color, transparent 20%),
+                    image-url('cdj.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  height: 230px;
+}
+
+#banner-show {
+  background-image: linear-gradient(transparent 50%, $bg-color), linear-gradient(to left, $bg-color, transparent, $bg-color), image-url('sounddesk2.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  height: 230px;
+}
+
+.hidden-options {
+  margin-top: 10px;
+  display: none;
+}
+
+.filter-option {
+  cursor: pointer;
+}
+
+.modal-dialog {
+  margin-top: 200px;
+}
+
+.modal-content {
+  background-color: $bg-color;
+  border-radius: 0;
+  box-shadow: 0 0 10px $main-color;
+  .close {
+    color: white;
+  }
+  .modal-header, .modal-body, .modal-footer {
+    border: none;
+  }
+}
+
+#new-sound-button {
+  position: absolute;
+}
+
+#new-sample-pack {
+  position: relative;
+  top: 50px;
+  background-color: $secondary-color;
+}
+
+#new-comment-form {
+  display: none;
+}
+
+#comments {
+  margin-top: 100px;
+  .panel-default {
+    border: none;
+    border-radius: 0;
+    .panel-heading {
+      background-color: #424242;
+      color: white;
+      border: none;
+      border-radius: 0;
+    }
+    .panel-body {
+      background-color: #1C1C1C;
+      border: none;
+      border-radius: 0;
+    }
+  }
+}
+
+.comment-partial {
+  margin-bottom: 30px;
+}
+
+.sound-show-partial {
+  margin-top: 100px;
+}

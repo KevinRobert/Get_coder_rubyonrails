@@ -1,0 +1,75 @@
+.navbar-nav > li > a:hover {
+  background-color: grey;
+}
+
+.navbar-nav > li > a:active,
+.navbar-nav > li > a:focus {
+  background-color: $main-color;
+}
+
+.nav .open > a,
+.nav .open > a:hover,
+.nav .open > a:focus {
+  background-color: $main-color;
+}
+
+.dropdown-menu {
+  background-color: $bg-color;
+  > li > a {
+    color: white;
+    &:hover {
+      background-color: $main-color;
+      color: white;
+    }
+  }
+}
+
+.alert {
+  background-color: $main-color;
+  color: white;
+  border: none;
+  width: auto;
+  margin-bottom: 0;
+}
+
+.navbar {
+  position: static;
+  background-color: transparent;
+  margin-bottom: 0;
+  a {
+    color: white;
+  }
+  .navbar-brand {
+    font-size: 1.5em;
+  }
+}
+
+body {
+  background-color: $bg-color;
+  color: white;
+  margin-bottom: 300px;
+}
+
+a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+.pagination {
+  margin-top: 100px;
+  margin-bottom: 50px;
+  li a {
+    border: none;
+    background-color: white;
+    color: $bg-color;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .active a {
+    background-color: $main-color;
+  }
+}
+
+.buying-options {
+  margin-top: 30px;
+}

@@ -1,0 +1,11 @@
+%main#home
+  .container
+    .jumbotron#home--maintext
+      %h2 Download and share high-quality beats, loops and samples with other musicians and producers around the world.
+      #home--buttons
+        %a.btn.btn-success.btn-lg#signup-button{ href: new_producer_registration_path }
+          Sign Up
+        %a.btn.btn-primary.btn-lg{ href: sounds_path }
+          Browse Sounds
+      %a{ href: producer_omniauth_authorize_path(:soundcloud) }
+        = image_tag('sc-connect.png')

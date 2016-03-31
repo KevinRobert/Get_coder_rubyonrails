@@ -1,0 +1,25 @@
+// Place all the styles related to the Profiles controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.profile-attrs {
+  height: 200px;
+  margin-top: 50px;
+  margin-bottom: 50px
+  dt {
+    color: $tertiary-color;
+  }
+  dd {
+    margin-bottom: 30px;
+    font-size: 1.5em;
+  }
+}
+
+.soundcloud-tracks {
+  clear: both;
+  h2 {
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+  margin-bottom: 100px;
+}

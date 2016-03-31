@@ -1,0 +1,37 @@
+.sample-pack-partial.col-md-11.col-md-offset-1
+  .col-md-10
+    %h2
+      = sample_pack.title
+    %p.text--blue
+      by #{sample_pack.seller.email}
+    .col-md-3
+      = image_tag("https://upbeat-sounds.s3.amazonaws.com/#{sample_pack.cover_image.path}", width: "170px")
+    %p.col-md-6
+      = sample_pack.description
+
+    .col-md-3.buying-options
+      - if current_producer && ( current_producer.purchased_packs.include? sample_pack )
+        %a.btn.btn-success{ href: download_sample_pack_path(sample_pack) }
+          DOWNLOAD
+      - else
+        %span.text--pink.price
+          £
+          = sample_pack.price
+
+        = form_tag charges_path do
+          %input{ type: "hidden", name: "sample_pack", value: sample_pack.id }
+          %input{ type: "hidden", name: "price", value: sample_pack.price * 100 }
+          %article
+            - if flash[:error].present?
+              #error_explanation
+                %p= flash[:error]
+
+          = javascript_tag nil, src: "https://checkout.stripe.com/checkout.js",
+                  class: "stripe-button",
+                  "data-key" => "#{ Rails.configuration.stripe[:publishable_key] }",
+                  "data-description" => "#{ sample_pack.title } sample pack",
+                  "data-amount" => "#{ sample_pack.price * 100 }",
+                  "data-currency" => "gbp",
+                  "data-locale" => "auto",
+                  "data-value" => "Buy",
+                  "data-samplepack" => "#{ sample_pack.id }"

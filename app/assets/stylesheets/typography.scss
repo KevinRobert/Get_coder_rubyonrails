@@ -1,0 +1,108 @@
+body {
+font-family: 'Open Sans', sans-serif;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+a {
+  color: white;
+}
+
+.text--blue {
+  color: $main-color;
+}
+
+.text--pink {
+  color: $secondary-color;
+}
+
+.text--green {
+  color: $tertiary-color;
+}
+
+.text--bold {
+  font-weight: bold;
+}
+
+.text--med {
+  font-size: 1.25em;
+}
+
+.text--center {
+  text-align: center;
+}
+
+.text--right {
+  text-align: right;
+  float: right;
+}
+
+.glyphicon {
+  color: white;
+}
+
+.voting {
+  margin-top: 7px;
+  float: right;
+  font-size: 1em;
+  text-align: center;
+  .glyphicon {
+    margin: 2px;
+    display: block;
+    cursor: pointer;
+  }
+}
+
+.glyphicon-remove {
+  border-radius: 100%;
+  background-color: #585858;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.glyphicon-edit {
+  border-radius: 100%;
+  background-color: #585858;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.glyphicon-download {
+  font-size: 1.75em;
+}
+
+.glyphicon-menu-left,
+.glyphicon-menu-right {
+  color: $bg-color;
+  font-size: 0.75em;
+}
+
+.download-button {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.btn-primary {
+  background-color: $main-color;
+  border: none;
+}
+
+.btn-danger {
+  background-color: #B40404;
+  border: none;
+}
+
+.btn-success {
+  background-color: $tertiary-color;
+  &, .glyphicon {
+    color: $bg-color;
+  }
+  border: none;
+}
+
+.btn {
+  font-weight: bold;
+}

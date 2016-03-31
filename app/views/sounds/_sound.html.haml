@@ -1,0 +1,68 @@
+%section.sound-partial.col-md-12
+  %a{ href: "#{ sound_path(sound) }" }
+    %h2
+      = sound.title
+  %p
+    = link_to "by #{sound.producer.email}", producer_sounds_path(sound.producer), class: "text--blue"
+
+  .col-md-8
+    .playbutton{ id: "play_button_#{sound.id}" }
+    = image_tag(sound.as3_waveform_path, width: "80%")
+    .voting
+      %span.glyphicon.glyphicon-chevron-up.upvote{ id: "upvote_#{ sound.id }" }
+      %span{ id: "votes_for_sound_#{sound.id}" }
+        = sound.net_votes
+      %span.glyphicon.glyphicon-chevron-down.downvote{ id: "downvote_#{ sound.id }" }
+
+  .col-md-3
+    - if sound.instrument
+      %p
+        instrument:
+        = link_to sound.instrument.name, sounds_path(instrument: sound.instrument.name), class: "text--blue"
+
+    - if sound.category
+      %p
+        category:
+        = link_to sound.category.name, sounds_path(category: sound.category.name), class: "text--blue"
+
+    %p
+      = link_to "Comments (#{sound.comments.length})", sound_path(sound), class: "text--green"
+
+    %a.downloadbutton{ href: download_sound_path(sound) }
+      %span.glyphicon.glyphicon-download
+
+  - unless sound.tags.empty?
+    %p.col-md-8.tags
+      tags:
+      %span.text--blue
+        - sound.tags.each do |tag|
+          = link_to tag.name, sounds_path(tag: tag.name), class: "tag"
+
+:javascript
+      soundManager.onready(function() {
+        $('#play_button_#{sound.id}').click(function() {
+          soundManager.createSound({
+              id: 'sound_#{ sound.id }',
+              url: "https://upbeat-sounds.s3.amazonaws.com/uploads/sound/#{sound.file.path.split('/')[-1]}",
+              onfinish: function() {
+                $('#play_button_#{sound.id}').css('background-position', '0 0');
+              }
+          });
+          soundManager.play('sound_#{ sound.id }');
+          $('#play_button_#{sound.id}').css('background-position', '50px 0');
+        });
+    });
+
+    $(function() {
+      $('#upvote_#{ sound.id }').click(function() {
+        $.post("#{ vote_sound_path(sound, v: "up") }", function(data) {
+          $("#votes_for_sound_#{sound.id}").text(data)
+        });
+      });
+
+      $('#downvote_#{ sound.id }').click(function() {
+        $.post("#{ vote_sound_path(sound, v: "down") }", function(data) {
+          $("#votes_for_sound_#{sound.id}").text(data)
+        });
+      });
+    });

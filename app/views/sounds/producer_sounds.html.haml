@@ -1,0 +1,99 @@
+.modal.fade#confirm-delete{ tabindex: 1, role: "dialog" }
+  .modal-dialog{ role: "document" }
+    .modal-content
+      .modal-header
+        %button{ type: "button", class: "close", "data-dismiss" => "modal", "aria-label" => "Close" }
+          %span{ "aria-hidden" => "true" }
+            &times;
+        %h4.modal-title
+          You're about to delete a sound
+      .modal-body
+        Are you sure you want to delete this sound? (this can't be undone)
+      .modal-footer
+        %button{ type: "button", class: "btn btn-primary", "data-dismiss" => "modal" }
+          Close
+        %button{ type: "button", class: "btn btn-danger", "data-dismiss" => "modal", onclick: "deleteSound()" }
+          Confirm Delete
+
+%main.container
+  #banner-mysounds
+  %h1.text--center
+    %a{ href: producer_sounds_path(@producer) }
+    - if ProducersHelper.producer_is_this_one?(current_producer, params)
+      %span.text--blue my
+    - else
+      %span.text--blue #{ @producer.email }'s
+    sounds
+
+  %section.text--center
+    %span.text--blue view by
+    %span#instrument-option.filter-option
+      Instrument
+    |
+    %span#category-option.filter-option
+      Category
+    |
+    %span#tag-option.filter-option
+      Tag
+    #instrument-select.hidden-options
+      - Instrument.all.each do |instrument|
+        = link_to instrument.name, producer_sounds_path(@producer, instrument: instrument.name)
+        = "|" unless instrument == Instrument.last
+    #category-select.hidden-options
+      - Category.all.each do |category|
+        = link_to category.name, producer_sounds_path(@producer, category: category.name)
+        = "|" unless category == Category.last
+    #tag-select.hidden-options
+      - Tag.all.each do |tag|
+        = link_to tag.name, producer_sounds_path(@producer, tag: tag.name)
+        = "|" unless tag == Tag.last
+    - if params[:instrument]
+      %h2 <span class="text--blue">instrument:</span> #{params[:instrument]}
+    - if params[:category]
+      %h2 <span class="text--blue">category:</span> #{params[:category]}
+    - if params[:tag]
+      %h2 <span class="text--blue">tag:</span> #{params[:tag]}
+
+  - if ProducersHelper.producer_is_this_one?(current_producer, params)
+    %a.btn.btn-success.btn-sm#new-sound-button{ href: new_sound_path }
+      %span.glyphicon.glyphicon-plus
+      New sound
+
+  - if current_producer.type == "Seller"
+    %a.btn.btn-success.btn-sm#new-sample-pack{ href: new_sample_pack_path }
+      %span.glyphicon.glyphicon-plus
+      New pack
+
+  - if @sounds
+    - @sounds.each do |sound|
+      .sound-section{ id: "sound-section-#{sound.id}" }
+        - if ProducersHelper.producer_is_this_one?(current_producer, params)
+          .col-md-2.sound-admin-links
+            %p.delete-sound{ id: "delete_sound_#{sound.id}", "data-toggle" => "modal", "data-target" => "#confirm-delete", onclick: "saveSoundId(#{sound.id})", "title" => "Delete sound" }
+              %span.glyphicon.glyphicon-remove
+            %a{ href: edit_sound_path(sound), "title" => "Edit sound", id: "edit_sound_#{sound.id}" }
+              %span.glyphicon.glyphicon-edit
+          .col-md-10
+            = render sound
+        - else
+          .col-md-10.col-md-offset-2
+            = render sound
+
+:javascript
+  $(function() {
+
+    $('#instrument-option').click(function() {
+      $('.hidden-options').hide();
+      $('#instrument-select').show();
+    });
+
+    $('#category-option').click(function() {
+      $('.hidden-options').hide();
+      $('#category-select').show();
+    });
+
+    $('#tag-option').click(function() {
+      $('.hidden-options').hide();
+      $('#tag-select').show();
+    });
+  });

@@ -1,0 +1,12 @@
+%main.container
+  #banner
+  %h1.text--center
+    %a{ href: sounds_path }
+      %span.text--blue
+        sample
+      packs
+
+  - if @sample_packs
+    - @sample_packs.each do |pack|
+      .sample-pack-section{ id: "pack-section-#{pack.id}" }
+        = render pack
